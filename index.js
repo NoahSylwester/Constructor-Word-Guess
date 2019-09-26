@@ -1,6 +1,7 @@
 var Word = require('./word.js');
-var inquirer = require('inquirer');
-const words = require('an-array-of-english-words')
+const inquirer = require('inquirer');
+const words = require('an-array-of-english-words');
+const colors = require('colors');
 
 var currentWord = new Word(words[Math.floor(Math.random() * words.length)]);
 var guessesRemaining = 10;
@@ -51,11 +52,12 @@ function start() {
     // checks to see if incorrect guess
     if (currentWordState === currentWord.returnWord()) {
       // reduces guessesRemaining
+      console.log(`\nIncorrect!\n`.red)
       guessesRemaining --;
       if (guessesRemaining === 0) {
         // lose if no guesses left, show word
         console.log(currentWord.returnFullWord());
-        console.log("You lose!");
+        console.log(`\nYOU LOSE!\n`.bold.brightRed);
         playAgain();
       }
       // else continue game
@@ -65,12 +67,14 @@ function start() {
     }
     // if there are guesses remaining and also un-guessed letters, continue game
     else if (currentWord.returnWord().search("_") !== -1) {
+      console.log(`\nCorrect!\n`.green)
       start();
     }
     // else user wins
     else {
+      console.log(`\nCorrect!\n`.green)
       console.log(currentWord.returnWord());
-      console.log("You win!");
+      console.log(`\nYOU WIN!\n`.bold.brightGreen);
       playAgain();
     }
   });
