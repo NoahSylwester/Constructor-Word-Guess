@@ -24,6 +24,7 @@ var playAgain = function() {
 }
 
 var validateInput = function(input) {
+  // checks if input is one character, and a letter
   if (input.length === 1 && input.toLowerCase() !== input.toUpperCase()) {
     if (!guessedLetters.includes(input)) {
       return true;
